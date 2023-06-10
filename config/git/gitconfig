@@ -1,0 +1,26 @@
+[user]
+	name = Kyrex
+	email = 59597626+kyrex23@users.noreply.github.com
+[init]
+	defaultBranch = main
+[core]
+	editor = vim
+	autocrlf = input
+	pager =
+[status]
+	showUntrackedFiles = all
+	showStash = true
+	short = true
+[fetch]
+	prune = true
+[format]
+	pretty = oneline
+[rebase]
+	abbreviateCommands = true
+[log]
+	abbrevCommit = true
+[pager]
+	diff = less
+	show = less
+[pull]
+	rebase = true
