@@ -1,0 +1,126 @@
+{
+	// Sets the colors used within the text area.
+	// The value "auto" will switch between the "light_color_scheme" and
+	// "dark_color_scheme" based on the operating system appearance.
+	"color_scheme": "Monokai.sublime-color-scheme",
+
+	// Note that the font_face and font_size are overridden in the platform
+	// specific settings file, for example, "Preferences (Linux).sublime-settings".
+	// Because of this, setting them here will have no effect: you must set them
+	// in your User File Preferences.
+	"font_face": "CaskaydiaCove NF Mono",
+	"font_size": 11,
+
+	// Set to a value other than 0 to force wrapping at that column rather than
+	// the window width. See "wrap_width_style" for extra options.
+	"wrap_width": 120,
+
+	// Columns in which to display vertical rulers
+	"rulers": [80,120],
+
+	// Set to true to draw a border around the visible rectangle on the minimap.
+	// The color of the border will be determined by the "minimap_border" key
+	// in the color scheme
+	"draw_minimap_border": true,
+
+	// Always visualise the viewport on the minimap, as opposed to only
+	// showing it on mouse over
+	"always_show_minimap_viewport": true,
+
+	// If enabled, will highlight any line with a caret
+	"highlight_line": true,
+
+	// Set to false to disable scrolling past the end of the buffer.
+	// On Mac, this value is overridden in the platform specific settings, so
+	// you'll need to place this line in your user settings to override it.
+	//
+	// This setting may also be set to a number between 0.0 and 1.0 to specify
+	// how much scrolling past the end of the buffer should be allowed. 0.5
+	// scrolls halfway and 0.0 is the same as false.
+	"scroll_past_end": false,
+
+	// Controls how the indent guides are drawn. Options may be combined, with
+	// valid options being:
+	//  - "draw_normal" - will draw plain indent guides for every indentation
+	//    group
+	//  - "draw_active" - will draw indent guides for the group
+	//    containing the caret in a different color
+	//  - "draw_active_single" - will draw the right-most indent guide in the
+	//    group containing the caret in a different color
+	//  - "solid" - can be combined with any of the draw_* options to draw
+	//    solid instead of stippled lines
+	"indent_guide_options": ["draw_normal", "draw_active_single", "solid"],
+
+	// Controls where trailing white space is removed on save.
+	// - "none": Do not remove any trailing white space on save.
+	// - "all": Remove all trailing white space on save.
+	// - "not_on_caret": Only remove white space that won't affect the caret.
+	//                   When used in conjunction with "save_on_focus_lost" and
+	//                   certain desktop environments that frequently make the
+	//                   application lose focus this avoids the caret jumping
+	//                   around a lot.
+	"trim_trailing_white_space_on_save": "all",
+
+	// Set to true to ensure the last line of the file ends in a newline
+	// character when saving
+	"ensure_newline_at_eof_on_save": true,
+
+	// When enabled, pressing tab will insert the best matching completion.
+	// When disabled, tab will only trigger snippets or insert a tab.
+	// Shift+tab can be used to insert an explicit tab when tab_completion is
+	// enabled.
+	"tab_completion": false,
+
+	// By default, auto complete will commit the current completion on enter.
+	// This setting can be used to make it complete on tab instead.
+	// Completing on tab is generally a superior option, as it removes
+	// ambiguity between committing the completion and inserting a newline.
+	"auto_complete_commit_on_tab": false,
+
+	// Controls if auto complete is shown when snippet fields are active.
+	// Only relevant if auto_complete_commit_on_tab is true.
+	"auto_complete_with_fields": false,
+
+	// Controls what happens when pressing the up key while the first item in
+	// the auto complete window is selected: if false, the window is hidden,
+	// otherwise the last item in the window is selected. Likewise for the
+	// down key when the last item is selected.
+	"auto_complete_cycle": true,
+
+	// These settings hide various parts of the UI automatically when typing.
+	// Moving the mouse will show them again.
+	"auto_hide_menu": true,
+	"auto_hide_tabs": false,
+	"auto_hide_status_bar": true,
+
+	// By default, shift+tab will only unindent if the selection spans
+	// multiple lines. When pressing shift+tab at other times, it'll insert a
+	// tab character - this allows tabs to be inserted when tab_completion is
+	// enabled. Set this to true to make shift+tab always unindent, instead of
+	// inserting tabs.
+	"shift_tab_unindent": true,
+
+	// When drag_text is enabled, clicking on selected text will begin a
+	// drag-drop operation.
+	"drag_text": false,
+
+	// Makes tabs with modified files more visible
+	"highlight_modified_tabs": true,
+
+	// Display file encoding in the status bar
+	"show_encoding": true,
+
+	// Display line endings in the status bar
+	"show_line_endings": true,
+
+	// Controls the behavior when clicking on a single file in the sidebar
+	// that's already open.
+	// - true: If the file is already open in any group it will be selected.
+	// - false: Only if the file is open in the focused group will it be
+	//          selected, otherwise a new view into the file is opened.
+	"select_across_groups": true,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+}
