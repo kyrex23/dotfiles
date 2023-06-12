@@ -1,0 +1,67 @@
+export PATH="$HOME/.local/bin:$PATH"
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+source ${ZDOTDIR:-$HOME}/antigen.zsh
+
+# Load the oh-my-zsh's library
+antigen use oh-my-zsh
+
+# Bundles from the default repository (robbyrussell's oh-my-zsh)
+antigen bundle sudo
+antigen bundle command-not-found
+
+# Bundles from other sources
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load powerlevel10k theme and load its config file
+antigen theme romkatv/powerlevel10k
+
+POWERLEVEL10K_CONFIG_FILE="${ZDOTDIR:-$HOME}/.p10k.zsh"
+[[ ! -f $POWERLEVEL10K_CONFIG_FILE ]] || source $POWERLEVEL10K_CONFIG_FILE
+
+# Finish antigen config
+antigen apply
+
+# ======================================================================================================================
+
+setopt histignorealldups sharehistory
+
+# Use emacs keybindings even if our EDITOR is set to vi
+bindkey -e
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+
+# Use modern completion system
+autoload -Uz compinit
+compinit
+
+# ======================================================================================================================
+
+SOURCE_FILES=(
+	"completion.zsh"
+	"aliases.zsh"
+	"functions.zsh"
+)
+
+for file in "${SOURCE_FILES[@]}"; do
+	pathfile="${ZDOTDIR:-$HOME}/$file"
+	[ -s "$pathfile" ] && source "$pathfile"
+done
+
+# ======================================================================================================================
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" # This loads nvm
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

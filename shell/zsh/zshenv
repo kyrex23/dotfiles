@@ -1,0 +1,37 @@
+# Avoid the global creation of zcompdump (see: /etc/zsh/zshrc)
+skip_global_compinit=1
+
+export ZDOTDIR="$HOME/.zsh"
+export HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+
+# ========================== ANTIGEN CONFIG VARIABLES ==========================
+# More details: https://github.com/zsh-users/antigen/wiki/Configuration
+
+# This directory is used to store all the repo clones, your bundles, themes,
+# caches and everything else Antigen requires to run smoothly
+# Defaults to: $HOME/.antigen
+export ADOTDIR="${ZDOTDIR:-$HOME}/.antigen"
+
+# Use this configuration to define where Antigen should store log information.
+# By default loggins is disabled. Useful when debugging failing bundle installs
+# export ANTIGEN_LOG="${ADOTDIR:-$HOME}/antigen.log"
+
+# This configures the path to the cache init file, where Antigen stores it's
+# cached bundles.Set to `false` to disable caching mechanism.
+# Defaults to: $ADOTDIR/init.zsh
+# export ANTIGEN_CACHE="$ADOTDIR/init.zsh"
+
+# Use this configuration to define where zsh's completion system should store
+# completions's dump file.
+# Defaults to: $ADOTDIR/.zcompdump
+# export ANTIGEN_COMPDUMP="$ADOTDIR/.zcompdump"
+
+# This directory is used to store bundle clones.
+# Defaults to: $ADOTDIR/bundles
+# export ANTIGEN_BUNDLES="$ADOTDIR/bundles"
+
+# Use this configuration to define where Antigen should create `.lock` files
+# Defaults to: unknown
+# export ANTIGEN_LOCK=
+
+# ==============================================================================
