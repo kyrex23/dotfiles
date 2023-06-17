@@ -7,33 +7,33 @@
 - link:
     # shell files
     ~/.zshenv:
-      path: ../shell/zsh/zshenv
+      path: shell/zsh/zshenv
     ~/.zsh/.zshrc:
-      path: ../shell/zsh/zshrc
+      path: shell/zsh/zshrc
     ~/.zsh/.p10k.zsh:
-      path: ../shell/zsh/p10k.zsh
+      path: shell/zsh/p10k.zsh
     ~/.zsh/antigen.zsh:
-      path: ../shell/zsh/antigen.zsh
+      path: shell/zsh/antigen.zsh
     ~/.zsh/aliases.zsh:
-      path: ../shell/zsh/aliases.zsh
+      path: shell/zsh/aliases.zsh
     ~/.zsh/functions.zsh:
-      path: ../shell/zsh/functions.zsh
+      path: shell/zsh/functions.zsh
     ~/.zsh/completion.zsh:
-      path: ../shell/zsh/completion.zsh
+      path: shell/zsh/completion.zsh
     # config files
     ~/.gitconfig:
-      path: ../config/git/gitconfig
+      path: config/git/gitconfig
     ~/.config/sublime-text/Packages/User/Preferences.sublime-settings:
-      path: ../config/sublime-text/Preferences.sublime-settings
+      path: config/sublime-text/Preferences.sublime-settings
     ~/.vimrc:
-      path: ../config/vim/vimrc
+      path: config/vim/vimrc
     ~/.config/Code/User/settings.json:
-      path: ../config/vscode/settings.json
+      path: config/vscode/settings.json
     # template files
     ~/Plantillas/git/:
-      path: ../templates/git/
+      path: templates/git/
     ~/Plantillas/bash-script.tpl:
-      path: ../templates/bash-script.tpl
+      path: templates/bash-script.tpl
 
 - shell:
     - command: sudo apt install -y zsh
