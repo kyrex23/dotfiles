@@ -1,6 +1,7 @@
 [user]
 	name = Kyrex
 	email = 59597626+kyrex23@users.noreply.github.com
+	signingkey = B0C68DA8C3A24483815AB265587B8A9810A58A86
 [init]
 	defaultBranch = main
 [core]
@@ -24,3 +25,5 @@
 	show = less
 [pull]
 	rebase = true
+[commit]
+	gpgsign = true
