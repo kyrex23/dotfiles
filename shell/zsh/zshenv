@@ -3,6 +3,7 @@ skip_global_compinit=1
 
 export ZDOTDIR="$HOME/.zsh"
 export HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+export DOTFILES="$HOME/Code/dotfiles"
 
 # ========================== ANTIGEN CONFIG VARIABLES ==========================
 # More details: https://github.com/zsh-users/antigen/wiki/Configuration
