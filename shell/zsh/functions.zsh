@@ -34,3 +34,15 @@ function bt-connect() {
 
 	bluetoothctl connect "$mac_address"
 }
+
+function download-repository() {
+	if [ "$#" -lt "2" ]; then
+		echo "Missing some argument. Usage: <user> <repository> [<branch>]"
+		return 1
+	fi
+	local -r user="$1"
+	local -r repository="$2"
+	local -r branch="${3:-main}"
+	local -r url="https://github.com/$user/$repository/archive/$branch.zip"
+	wget "$url"
+}
