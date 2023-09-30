@@ -1,0 +1,25 @@
+#!/usr/bin/bash
+
+# ======================================================================================================================
+# This script is executed before each commit to ensure the message format is correct
+#
+# Author: Kyrex
+# Date:   28/05/2023
+# ======================================================================================================================
+
+set -euo pipefail
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+COMMIT_TYPES=("init" "feat" "fix" "refactor" "docs" "chore")
+
+# Compose the commit message format:
+# pattern = [init|feat|fix|refactor|docs]: \[[base|assets|config|modules|scripts|shell|symlinks|windows]\] <message>
+pattern="^(fixup!\s)?($(IFS="|"; echo "${COMMIT_TYPES[*]}")):\s.+$"
+
+commit_message="$(cat $1)"
+
+if ! [[ $commit_message =~ $pattern ]]; then
+	echo "❌ Invalid commit message format. Expected format: $pattern"
+	exit 1
+fi

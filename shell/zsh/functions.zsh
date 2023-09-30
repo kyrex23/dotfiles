@@ -21,11 +21,19 @@ function ginit() {
 
 	echo "Copying init files to this directory..."
 	for file in $GIT_TEMPLATES/{.*,*}; do
-		cp $file ./ && echo "  File [$file] copied: OK"
+		cp -r $file ./ && echo "  File [$file] copied: OK"
 	done
 	echo "Init files copied successfully. Creating repository..."
 
 	git init
+
+	echo "Installing github workflows..."
+	mv github .github
+	echo "Github workflows installed: OK"
+
+	echo "Installing git hooks..."
+	mv git/hooks/* .git/hooks/ && rm -rf git
+	echo "Git hooks installed: OK"
 }
 
 function bt-connect() {
