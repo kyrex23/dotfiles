@@ -50,5 +50,6 @@
 	"workbench.colorTheme": "Default Dark+ Experimental",
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.iconTheme": "vscode-icons",
-	"workbench.startupEditor": "none"
+	"workbench.startupEditor": "none",
+	"java.format.enabled": false
 }
