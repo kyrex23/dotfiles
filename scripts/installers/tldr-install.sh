@@ -9,7 +9,7 @@
 # - https://npmmirror.com/package/tldr
 # - https://www.npmjs.com/package/tldr
 #
-# Author: Kyrex
+# Author: kyrex23
 # Date:   01/11/2022
 # ======================================================================================================================
 

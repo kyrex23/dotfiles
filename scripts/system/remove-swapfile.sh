@@ -4,7 +4,7 @@
 # Disables the swapfile and removes it from /etc/fstab
 # A backup of /etc/fstab is created before deleting /swapfile from it
 #
-# Author: Kyrex
+# Author: kyrex23
 # Date:   23/10/2022 
 # ======================================================================================================================
 

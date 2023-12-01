@@ -5,7 +5,7 @@
 # - Fonts installed for the current user will be located into ~/.local/share/fonts
 # - Fonts installed for all the users will be located into /usr/local/share/fonts (recommended over /usr/share/fonts)
 #
-# Author: Kyrex
+# Author: kyrex23
 # Date:   12/05/2023
 # ======================================================================================================================
 

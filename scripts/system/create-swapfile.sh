@@ -4,7 +4,7 @@
 # Creates a swapfile `/swapfile` 3GB in size and loads it in `/etc/fstab`
 # A backup of `/etc/fstab` is created before adding `/swapfile` to it
 #
-# Author: Kyrex
+# Author: kyrex23
 # Date:   23/10/2022
 # ======================================================================================================================
 
