@@ -29,6 +29,8 @@
       path: config/vim/vimrc
     ~/.config/Code/User/settings.json:
       path: config/vscode/settings.json
+    ~/.config/Code/User/keybindings.json:
+      path: config/vscode/keybindings.json
     # template files
     ~/Plantillas/git/:
       path: templates/git/

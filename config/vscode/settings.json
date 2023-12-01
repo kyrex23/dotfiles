@@ -19,7 +19,7 @@
 		"ruby": "ruby",
 		"rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
 		"shellscript": "bash",
-		"typescript": "ts-node",
+		"typescript": "ts-node"
 	},
 	"code-runner.runInTerminal": true,
 	"code-runner.saveFileBeforeRun": true,
@@ -47,9 +47,9 @@
 	"redhat.telemetry.enabled": false,
 	"terminal.integrated.copyOnSelection": true,
 	"terminal.integrated.enablePersistentSessions": false,
-	"workbench.colorTheme": "Default Dark+ Experimental",
 	"workbench.editor.highlightModifiedTabs": true,
 	"workbench.iconTheme": "vscode-icons",
 	"workbench.startupEditor": "none",
-	"java.format.enabled": false
+	"java.format.enabled": false,
+	"window.zoomLevel": 1
 }
