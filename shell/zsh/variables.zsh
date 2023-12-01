@@ -8,4 +8,4 @@ export DOTFILES="$HOME/Code/dotfiles"
 export GOPATH="$HOME/go"         # This env is automatically set
 export GOBIN="$GOPATH/bin"
 export GOROOT="/usr/local/go"    # This env is automatically set
-export PATH="$PATH:$GOROOT/bin"
+export PATH="$PATH:$GOBIN:$GOROOT/bin"
