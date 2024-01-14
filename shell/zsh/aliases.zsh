@@ -11,6 +11,9 @@ alias treefull='tree -al -uh -F --dirsfirst --sort name -I .git'
 
 alias xcopy='xclip -selection clipboard'
 alias xpaste='xclip -out -selection clipboard'
+
+# Alternative to `curl cheat.sh/<command>` or `tldr <command>`
+alias cht='cht.sh'
 # ======================================================================================================================
 
 alias dotfiles='code $DOTFILES'
