@@ -11,7 +11,7 @@ set -euo pipefail
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-URL_KEY="https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg"
+URL_KEY="https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg"
 URL_SRC="http://repository.spotify.com"
 
 FILE_KEY="/usr/share/keyrings/spotify.gpg"
