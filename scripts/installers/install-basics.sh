@@ -7,7 +7,9 @@
 # Date:   24/10/2022
 # ==============================================================================
 
-set -euo pipefail
+# Uncomment the following line to stop script when a command fails
+# This causes partial execution when some command is already installed
+#set -euo pipefail
 
 # ------------------------------------------------------------------------------
 
@@ -76,7 +78,7 @@ install_command 7z p7zip-full
 install_command batcat bat
 
 # Create a symlink ~/.local/bin/cat for /usr/bin/batcat
-if [ ! -l ~/.local/bin/cat ]; then
+if [ ! -L ~/.local/bin/cat ]; then
 	mkdir -p ~/.local/bin
 	ln -s $(which batcat) ~/.local/bin/bat
 fi
