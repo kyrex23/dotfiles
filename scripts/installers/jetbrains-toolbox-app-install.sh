@@ -109,7 +109,7 @@ echo "✅ File extracted -> $install_dir/$BINARY_FILE"
 echo
 
 echo "Creating a symlink for $install_dir/$BINARY_FILE..."
-ln -sf $install_dir/$BINARY_FILE -t $symlink_dir
+$SUDO ln -sf $install_dir/$BINARY_FILE -t $symlink_dir
 echo "Symlink created --> $symlink_dir/$BINARY_FILE"
 echo
 
