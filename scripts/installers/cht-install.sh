@@ -14,7 +14,7 @@ sudo apt install rlwrap
 # Current user installation
 
 LOCAL_BIN_DIR="$HOME/.local/bin"
-mkdir -p "$BIN_DIR"
+mkdir -p "$LOCAL_BIN_DIR"
 
 LOCAL_OUT_BIN="$LOCAL_BIN_DIR/cht.sh"
 
