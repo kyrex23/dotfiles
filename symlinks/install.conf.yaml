@@ -14,6 +14,8 @@
       path: shell/zsh/p10k.zsh
     ~/.zsh/antigen.zsh:
       path: shell/zsh/antigen.zsh
+    ~/.zsh/variables.zsh:
+      path: shell/zsh/variables.zsh
     ~/.zsh/aliases.zsh:
       path: shell/zsh/aliases.zsh
     ~/.zsh/functions.zsh:
