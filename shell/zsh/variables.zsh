@@ -1,5 +1,6 @@
 # Add ~/.local/bin to the PATH with higher priority
 export PATH="$HOME/.local/bin:$PATH"
+export FPATH="$FPATH:$HOME/.local/share/zsh/vendor-completions"
 
 # Environment variables for dotfiles management
 export DOTFILES="$HOME/Code/dotfiles"

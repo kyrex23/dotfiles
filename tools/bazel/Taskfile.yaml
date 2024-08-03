@@ -1,0 +1,44 @@
+version: "3"
+
+silent: true
+
+tasks:
+  install:
+    desc: "Install bazel - build and test tool"
+    summary: |
+      Bazel is an open-source build and test tool similar to Maven
+
+      This task downloads the latest [bazelisk] release from Github to: $HOME/.local/bin/bazelisk
+      This also creates a symbolic link to: $HOME/.local/bin/bazel to make both commands available
+
+      Reference links:
+      - https://bazel.build
+      - https://github.com/bazelbuild/bazelisk
+    vars:
+      BAZEL_BIN_PATH: "$HOME/.local/bin/bazel"
+      BAZELISK_BIN_PATH: "$HOME/.local/bin/bazelisk"
+      LATEST_VERSION:
+        sh: curl -s https://api.github.com/repos/bazelbuild/bazelisk/releases/latest | jq '.tag_name' | tr -d 'v"'
+      DOWNLOAD_URL:
+        sh:
+          curl -s https://api.github.com/repos/bazelbuild/bazelisk/releases/latest |
+          jq '.assets[].browser_download_url | (select(. | endswith("-linux-amd64")))' |
+          tr -d '"'
+    cmds:
+      - echo "Downloading bazelisk [{{.DOWNLOAD_URL}}]..."
+      - wget -qO {{(expandenv .BAZELISK_BIN_PATH)}} --show-progress {{.DOWNLOAD_URL}}
+      - echo "Creating symlink [{{(expandenv .BAZELISK_BIN_PATH)}}] -> [{{(expandenv .BAZEL_BIN_PATH)}}]..."
+      - ln -sf {{(expandenv .BAZELISK_BIN_PATH)}} {{(expandenv .BAZEL_BIN_PATH)}}
+      - chmod +x {{(expandenv .BAZEL_BIN_PATH)}} {{(expandenv .BAZELISK_BIN_PATH)}}
+      - task: load-completions
+      - echo "🟢 [bazel] and [bazelisk] installation completed!"
+
+  load-completions:
+    desc: "Configure completions for bazel commands"
+    vars:
+      SRC_COMPLETIONS_FILE: "./bazel.completions"
+      DEST_COMPLETIONS_FILE: "$HOME/.local/share/zsh/vendor-completions/_bazel"
+    cmds:
+      - echo "Copying completions [{{expandenv .SRC_COMPLETIONS_FILE}}] -> [{{expandenv .DEST_COMPLETIONS_FILE}}]..."
+      - mkdir -p {{(dir (expandenv .DEST_COMPLETIONS_FILE))}}
+      - cp {{(expandenv .SRC_COMPLETIONS_FILE)}} {{(expandenv .DEST_COMPLETIONS_FILE)}}
