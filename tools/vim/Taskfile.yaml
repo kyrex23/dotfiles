@@ -1,0 +1,34 @@
+version: "3"
+
+includes:
+  dist: ../Taskfile.dist.yaml
+
+vars:
+  PPA_REPOSITORY: jonathonf/vim
+  CONFIG_SOURCE_PATH: "{{.TASKFILE_DIR}}/config/vimrc"
+  CONFIG_TARGET_PATH: "$HOME/.vimrc"
+
+tasks:
+  setup-all:
+    desc: Install vim and custom settings
+    cmds:
+      - task: install
+      - task: links
+
+  install:
+    desc: Install vim - improved vi editor
+    cmds:
+      - sudo add-apt-repository --yes ppa:{{.PPA_REPOSITORY}}
+      - dist:apt:install-vim
+    status: [command -v vim]
+
+  links:
+    desc: Create symlinks for vim configuration files
+    cmd: ln -sf {{(expandenv .CONFIG_SOURCE_PATH)}} {{(expandenv .CONFIG_TARGET_PATH)}}
+
+  purge:
+    desc: Uninstall vim and remove its repository and config links
+    cmds:
+      - sudo apt purge vim
+      - sudo add-apt-repository --remove --yes ppa:{{.PPA_REPOSITORY}}
+      - rm -f {{(expandenv .CONFIG_TARGET_PATH)}}
