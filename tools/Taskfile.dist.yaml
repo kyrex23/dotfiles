@@ -1,0 +1,34 @@
+version: "3"
+
+silent: true
+
+tasks:
+  apt:update:
+    desc: Update the list of available repositories and packages
+    summary: |
+      A basic usage of `apt:update` will update the list of available repositories and packages.
+      However, a variable `PACKAGE` can be used to run this task only when the given PACKAGE is not installed yet.
+    silent: true
+    internal: true
+    run: once
+    cmd: sudo apt -qq update
+    status:
+      - test -n "{{.PACKAGE}}" && command -v "{{.PACKAGE}}"
+
+  apt:install-*:
+    desc: Install some package using apt
+    deps:
+      - task: apt:update
+        vars:
+          PACKAGE: .PACKAGE
+    vars:
+      PACKAGE: "{{index .MATCH 0}}"
+    cmd: sudo apt install --yes {{.PACKAGE}}
+    status:
+      - command -v "{{.PACKAGE}}"
+
+  apt:clean:
+    desc: Remove unused dependencies and clean local repository of retrieved package files
+    cmds:
+      - sudo apt autoremove --purge
+      - sudo apt autoclean
