@@ -6,7 +6,7 @@ includes:
 vars:
   PPA_REPOSITORY: jonathonf/vim
   CONFIG_SOURCE_PATH: "{{.TASKFILE_DIR}}/config/vimrc"
-  CONFIG_TARGET_PATH: "$HOME/.vimrc"
+  CONFIG_TARGET_PATH: "{{.HOME}}/.vimrc"
 
 tasks:
   setup-all:
@@ -24,11 +24,11 @@ tasks:
 
   links:
     desc: Create symlinks for vim configuration files
-    cmd: ln -sf {{(expandenv .CONFIG_SOURCE_PATH)}} {{(expandenv .CONFIG_TARGET_PATH)}}
+    cmd: ln -sf {{.CONFIG_SOURCE_PATH}} {{.CONFIG_TARGET_PATH}}
 
   purge:
     desc: Uninstall vim and remove its repository and config links
     cmds:
       - sudo apt purge vim
       - sudo add-apt-repository --remove --yes ppa:{{.PPA_REPOSITORY}}
-      - rm -f {{(expandenv .CONFIG_TARGET_PATH)}}
+      - rm -f {{.CONFIG_TARGET_PATH}}

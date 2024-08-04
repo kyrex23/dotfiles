@@ -75,8 +75,8 @@ tasks:
     desc: Create symlinks for vscode configuration files
     vars:
       SOURCE_PATH: "{{.TASKFILE_DIR}}"
-      TARGET_PATH: "$HOME/.config/Code/User"
+      TARGET_PATH: "{{.HOME}}/.config/Code/User"
     sources: [config/*.json]
     cmds:
       - for: sources
-        cmd: ln -sf {{joinPath .SOURCE_PATH .ITEM}} {{joinPath (expandenv .TARGET_PATH) (base .ITEM)}}
+        cmd: ln -sf {{joinPath .SOURCE_PATH .ITEM}} {{joinPath .TARGET_PATH (base .ITEM)}}
