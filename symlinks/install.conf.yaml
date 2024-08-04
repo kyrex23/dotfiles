@@ -25,8 +25,6 @@
     # config files
     ~/.gitconfig:
       path: config/git/gitconfig
-    ~/.config/sublime-text/Packages/User/Preferences.sublime-settings:
-      path: config/sublime-text/Preferences.sublime-settings
     ~/.vimrc:
       path: config/vim/vimrc
     # template files

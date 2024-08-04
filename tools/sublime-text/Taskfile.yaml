@@ -1,0 +1,37 @@
+version: "3"
+
+includes:
+  utils: ../Taskfile.dist.yaml
+
+silent: true
+
+tasks:
+  setup-all:
+    desc: Install sublime-text and custom settings
+    cmds:
+      - task: install
+      - task: links
+
+  install:
+    desc: Install sublime-text - text editor
+    vars:
+      KEY_URL: "https://download.sublimetext.com/sublimehq-pub.gpg"
+      KEY_FILE: "/usr/share/keyrings/sublime-text.gpg"
+      SRC_URL: "https://download.sublimetext.com"
+      SRC_FILE: "/etc/apt/sources.list.d/sublime-text.list"
+    cmds:
+      - wget -qO - {{.KEY_URL}} | gpg --dearmor | sudo tee {{.KEY_FILE}} > /dev/null
+      - echo "deb [arch={{ARCH}} signed-by={{.KEY_FILE}}] {{.SRC_URL}} apt/stable/" |
+        sudo tee {{.SRC_FILE}} > /dev/null
+      - task: utils:apt:install-sublime-text
+    status: [command -v subl]
+
+  links:
+    desc: Create symlinks for sublime-text configuration files
+    vars:
+      SOURCE_PATH: "{{.TASKFILE_DIR}}"
+      TARGET_PATH: "$HOME/.config/sublime-text/Packages/User"
+    sources: [config/*]
+    cmds:
+      - for: sources
+        cmd: ln -sf {{joinPath .SOURCE_PATH .ITEM}} {{joinPath (expandenv .TARGET_PATH) (base .ITEM)}}
