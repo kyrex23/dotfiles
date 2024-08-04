@@ -6,6 +6,11 @@ includes:
 silent: true
 
 tasks:
+  calibre:install:
+    desc: Install calibre - ebook manager
+    cmd: wget -qO - https://download.calibre-ebook.com/linux-installer.sh | bash
+    status: [command -v calibre]
+
   google-chrome:install:
     desc: Install google-chrome - web browser
     vars:

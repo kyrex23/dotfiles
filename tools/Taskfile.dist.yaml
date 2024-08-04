@@ -20,7 +20,7 @@ tasks:
     deps:
       - task: apt:update
         vars:
-          PACKAGE: .PACKAGE
+          PACKAGE: "{{.PACKAGE}}"
     vars:
       PACKAGE: "{{index .MATCH 0}}"
     cmd: sudo apt install --yes {{.PACKAGE}}

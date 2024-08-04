@@ -12,13 +12,9 @@ alias treefull='tree -al -uh -F --dirsfirst --sort name -I .git'
 alias xcopy='xclip -selection clipboard'
 alias xpaste='xclip -out -selection clipboard'
 
-alias deeplen='deepl --fr es --to en'
-alias deeples='deepl --fr en --to es'
-
-# Alternative to `curl cheat.sh/<command>` or `tldr <command>`
-alias cht='cht.sh'
+alias deeplen='deepl --fr es --to en --stdin'
+alias deeples='deepl --fr en --to es --stdin'
 # ======================================================================================================================
-
 alias dotfiles='code $DOTFILES'
 
 # Clean untagged images (none:none)

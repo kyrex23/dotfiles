@@ -4,6 +4,41 @@ includes:
   dist: ../Taskfile.dist.yaml
 
 tasks:
+  bat:install:
+    desc: Install bat - cat clone with wings
+    vars:
+      INSTALLED_VERSION:
+        sh: bat --version 2>/dev/null | awk '{print $2}'
+      LATEST_VERSION:
+        sh: curl -s https://api.github.com/repos/sharkdp/bat/releases/latest | jq -r '.tag_name' | tr -d 'v'
+      GITHUB_DOWNLOAD_URL:
+        sh: curl -s https://api.github.com/repos/sharkdp/bat/releases/latest |
+          jq -r '.assets[].browser_download_url | select(. | endswith("_amd64.deb") and (contains("musl") | not))'
+      DEB_FILE: "/tmp/{{base .GITHUB_DOWNLOAD_URL}}"
+    cmds:
+      - wget -qO {{.DEB_FILE}} {{.GITHUB_DOWNLOAD_URL}}
+      - sudo apt install {{.DEB_FILE}}
+    status:
+      - '[ "{{.INSTALLED_VERSION}}" == "{{.LATEST_VERSION}}" ]'
+
+  cht:install:
+    desc: Install cht - CLI cheat-sheet
+    summary: Alternative to `curl cheat.sh/<command>` or `tldr <command>`
+    # The package [rlwrap] is a required dependency to run in shell mode
+    deps: [rlwrap:install]
+    vars:
+      BIN_FILE: "{{.HOME}}/.local/bin/cht"
+    cmds:
+      - mkdir -p $(dirname {{.EXE_FILE}})
+      - curl -s https://cht.sh/:cht.sh > "{{.BIN_FILE}}"
+      - chmod +x "{{.BIN_FILE}}"
+    status:
+      - command -v {{(base .BIN_FILE)}}
+
+  curl:install:
+    desc: Install curl - CLI tool for transferring data with URL syntax
+    cmd: { task: dist:apt:install-curl }
+
   docker:install:
     desc: Install docker - application container engine
     vars:
@@ -24,3 +59,126 @@ tasks:
       - sudo usermod -aG docker $USER
       - echo "🟢 User [$USER] has been added to [docker] group (logout is required)"
     status: [command -v docker]
+
+  espanso:install:
+    desc: Install espanso - text expander
+    summary: |
+      A multiplatform text-expander to use system-wide code snippets
+
+      Related links:
+      - https://espanso.org
+      - https://github.com/espanso/espanso
+    vars:
+      GITHUB_DOWNLOAD_URL:
+        sh:
+          curl -s https://api.github.com/repos/espanso/espanso/releases/latest |
+          jq -r '.assets[].browser_download_url | (select(. | endswith("{{.XDG_SESSION_TYPE}}-amd64.deb")))'
+      DEB_FILE: "/tmp/{{base .GITHUB_DOWNLOAD_URL}}"
+    cmds:
+      - wget --show-progress -qO {{.DEB_FILE}} {{.GITHUB_DOWNLOAD_URL}}
+      - sudo apt install {{.DEB_FILE}}
+      - espanso service register
+      - espanso start
+    status: [command -v espanso]
+
+  flatpak:install:
+    desc: Install flatpak and GNOME support - Application deployment framework for desktop apps
+    vars:
+      FLATHUB_REPOSITORY: "https://flathub.org/repo/flathub.flatpakrepo"
+    cmds:
+      - task: dist:apt:install-flatpak
+      - task: dist:apt:install-gnome-software-plugin-flatpak
+      - flatpak remote-add --if-not-exists flathub {{.FLATHUB_REPOSITORY}}
+    status: [command -v flatpak]
+
+  gnome-sushi:install:
+    desc: Install gnome-sushi - quick previewer for nautilus
+    cmd: { task: dist:apt:install-gnome-sushi }
+
+  gnome-tweaks:install:
+    desc: Install gnome-tweaks - advanced configuration settings for GNOME
+    cmd: { task: dist:apt-install-gnome-tweaks }
+
+  grub-customizer:install:
+    desc: Install grub-customizer - graphical configuration tool to modify grub2
+    cmds:
+      - sudo add-apt-repository --yes ppa:danielrichter2007/grub-customizer
+      - task: dist:apt:install-grub-customizer
+    status: [command -v grub-customizer]
+
+  grub-theme-bigsur:install:
+    desc: Install bigsur - theme for grub2
+    vars:
+      TARGET_PATH: "{{.HOME}}/Code/repositories/external-tools/bigsur-grub2-theme"
+    cmds:
+      - mkdir -p {{dir .TARGET_PATH}}
+      - git clone --depth 1 https://github.com/Teraskull/bigsur-grub2-theme {{.TARGET_PATH}}
+      - "{{.TARGET_PATH}}/install.sh"
+
+  neofetch:install:
+    desc: Install neofetch - Show Linux System Information
+    cmd: { task: dist:apt:install-neofetch }
+
+  node:install:
+    desc: Install node
+    deps: [nvm:install]
+    cmd: . $NVM_DIR/nvm.sh && nvm install node --default
+
+  nvm:install:
+    desc: Install nvm (Node Version Manager)
+    vars:
+      CURRENT_VERSION:
+        sh: . $NVM_DIR/nvm.sh && nvm --version
+      LATEST_VERSION:
+        sh: curl --silent https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq '.tag_name' | tr -d 'v"'
+    cmd: curl --silent --output - https://raw.githubusercontent.com/nvm-sh/nvm/{{.LATEST_VERSION}}/install.sh | bash
+    status:
+      - '[ "{{.CURRENT_VERSION}}" == "{{.LATEST_VERSION}}" ]'
+
+  qbittorrent:install:
+    desc: Install qbittorrent - torrent client
+    cmds:
+      - sudo add-apt-repository --yes ppa:qbittorrent-team/qbittorrent-stable
+      - task: dist:apt:install-qbittorrent
+    status: [command -v qbittorrent]
+
+  rlwrap:install:
+    desc: Install rlwrap - wrapper for console readline
+    cmd: { task: dist:apt:install-rlwrap }
+    internal: true
+
+  tldr:install:
+    desc: Install tldr - simplified and community-driven man pages
+    summary: |
+      Related links:
+      - https://itsfoss.com/tldr-linux-man-pages-simplified/
+      - https://github.com/tldr-pages/tldr
+      - https://npmmirror.com/package/tldr
+      - https://www.npmjs.com/package/tldr
+    deps: [node:install]
+    cmds:
+      - sudo npm install --global tldr
+      - tldr --update
+    status: [command -v tldr]
+
+  tlp:install:
+    desc: Install power-management tools (tlp, tlp-rdw, ...) and enable it as service
+    cmds:
+      - task: dist:apt:install-tlp
+      - task: dist:apt:install-tlp-rdw
+      - sudo systemctl enable tlp
+
+  tree:install:
+    desc: Install tree - displays an indented directory tree
+    cmd: { task: dist:apt:install-tree }
+
+  ubuntu-restricted-extras:install:
+    desc: Install private extras for Ubuntu (ttf-mscorefonts, media codecs, ...)
+    cmd: { task: dist:apt:install-ubuntu-restricted-extras }
+
+  zip-utils:install:
+    desc: Install zip commands (7zip, p7zip-full, p7zip-rar)
+    cmds:
+      - task: dist:apt:install-p7zip-full
+      - task: dist:apt:install-p7zip-rar
+    status: [command -v p7zip]
