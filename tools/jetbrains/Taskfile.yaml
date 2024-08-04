@@ -1,0 +1,17 @@
+version: "3"
+
+includes:
+  utils: ../Taskfile.dist.yaml
+
+tasks:
+  toolbox:install:
+    desc: Install jetbrains-toolbox - manager for jetbrains apps
+    cmd: ./install-jetbrains-toolbox.sh
+    status: [command -v jetbrains-toolbox]
+
+  intellij:install:
+    desc: Install intellij-idea (without toolbox) - Java IDE
+    cmds:
+      - sudo add-apt-repository --yes "ppa:mmk2410/intellij-idea"
+      - task: utils:apt:install-intellij-idea-community
+    status: [command -v idea]
