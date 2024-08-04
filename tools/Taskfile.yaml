@@ -1,0 +1,20 @@
+version: "3"
+
+includes:
+  utils: ./Taskfile.dist.yaml
+
+silent: true
+
+tasks:
+  google-chrome:install:
+    desc: Install google-chrome - web browser
+    vars:
+      KEY_URL: "https://dl.google.com/linux/linux_signing_key.pub"
+      KEY_FILE: "/usr/share/keyrings/google-chrome.gpg"
+      SRC_URL: "https://dl.google.com/linux/chrome/deb"
+      SRC_FILE: "/etc/apt/sources.list.d/google-chrome.list"
+    cmds:
+      - wget -qO - {{.KEY_URL}} | gpg --dearmor | sudo tee {{.KEY_FILE}} > /dev/null
+      - echo "deb [arch={{ARCH}} signed-by={{.KEY_FILE}}] {{.SRC_URL}} stable main" | sudo tee {{.SRC_FILE}} > /dev/null
+      - task: utils:apt:install-google-chrome-stable
+    status: [command -v google-chrome]
