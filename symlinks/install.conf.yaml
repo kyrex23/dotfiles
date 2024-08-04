@@ -26,8 +26,6 @@
     ~/.gitconfig:
       path: config/git/gitconfig
     # template files
-    ~/Plantillas/git/:
-      path: templates/git/
     ~/Plantillas/bash-script.tpl:
       path: templates/bash-script.tpl
     ~/Plantillas/new-file.txt:

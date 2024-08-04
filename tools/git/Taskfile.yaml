@@ -1,0 +1,41 @@
+version: "3"
+
+includes:
+  dist: ../Taskfile.dist.yaml
+
+vars:
+  SOURCE_PATH: "{{.TASKFILE_DIR}}"
+
+tasks:
+  setup-all:
+    desc: Install git and create symlinks to config files and templates
+    cmds:
+      - task: install
+      - task: links
+
+  install:
+    desc: Install git - distributed revision control system
+    cmd:
+      task: dist:apt:install-git
+    status: [command -v git]
+
+  links:
+    desc: Create symlinks for git configuration files and templates
+    cmds:
+      - task: config-links
+      - task: template-links
+
+  config-links:
+    desc: Create symlinks for git configuration files
+    vars:
+      SOURCE_PATH: "{{.TASKFILE_DIR}}/config"
+    cmd: ln -sf {{joinPath .SOURCE_PATH "gitconfig"}} "{{.HOME}}/.gitconfig"
+
+  template-links:
+    desc: Create symlinks for git templates
+    vars:
+      SOURCE_PATH: "{{.SOURCE_PATH}}/templates"
+      TARGET_PATH: "{{.HOME}}/Plantillas/git"
+    cmds:
+      - rm -f {{.TARGET_PATH}}
+      - ln -sf {{.SOURCE_PATH}} {{.TARGET_PATH}}
