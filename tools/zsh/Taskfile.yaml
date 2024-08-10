@@ -1,0 +1,34 @@
+version: "3"
+
+includes:
+  dist: ../Taskfile.dist.yaml
+
+tasks:
+  setup-all:
+    desc: Install zsh and configure as the default shell for the current user
+    cmds:
+      - task: install
+      - chsh -s $(which zsh)
+      - echo "zsh is set as the default shell - logout is required"
+      - task: links
+
+  install:
+    desc: Install zsh - extended version of the Bourne shell (sh)
+    cmd: { task: dist:apt:install-zsh }
+
+  links:
+    desc: Create symlinks for the zsh config files
+    vars:
+      DEFAULT_ZDOTDIR: "{{.HOME}}/.zsh"
+      ZDOTDIR: "{{.ZDOTDIR | default .DEFAULT_ZDOTDIR}}"
+    sources:
+      - config/*
+      - exclude: config/zshenv
+      - exclude: config/zshrc
+      - exclude: config/p10k.zsh
+    cmds:
+      - ln -sf {{.TASKFILE_DIR}}/config/zshenv {{.HOME}}/.zshenv
+      - ln -sf {{.TASKFILE_DIR}}/config/zshrc {{.ZDOTDIR}}/.zshrc
+      - ln -sf {{.TASKFILE_DIR}}/config/p10k.zsh {{.ZDOTDIR}}/.p10k.zsh
+      - for: sources
+        cmd: ln -sf {{.TASKFILE_DIR}}/{{.ITEM}} {{.ZDOTDIR}}/{{base .ITEM}}
