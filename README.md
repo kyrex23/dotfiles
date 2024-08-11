@@ -41,9 +41,6 @@ Install the required tools to be able to use the repository into your system and
 sudo apt update
 sudo apt install git curl python3
 git clone https://github.com/kyrex23/dotfiles.git ~/dotfiles
-
-cd ~/dotfiles
-symlinks/install
 ```
 
 
