@@ -11,7 +11,7 @@ set -euo pipefail
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-COMMIT_TYPES=("init" "feat" "fix" "refactor" "docs" "chore" "wip" "task")
+COMMIT_TYPES=("init" "feat" "fix" "refactor" "docs" "chore" "revert" "style" "task" "wip")
 
 # Compose the commit message format:
 # pattern = [init|feat|fix|refactor|docs]: \[[base|assets|config|modules|scripts|shell|symlinks|windows]\] <message>
