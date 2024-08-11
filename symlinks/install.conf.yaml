@@ -3,10 +3,3 @@
       force: true
       create: true
       relink: true
-
-- link:
-    # template files
-    ~/Plantillas/bash-script.tpl:
-      path: templates/bash-script.tpl
-    ~/Plantillas/new-file.txt:
-      path: templates/new-file.txt

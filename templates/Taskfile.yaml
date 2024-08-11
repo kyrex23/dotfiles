@@ -1,0 +1,11 @@
+version: "3"
+
+tasks:
+  links:
+    desc: Create symlinks for system templates
+    sources:
+      - "./*"
+      - exclude: Taskfile.yaml
+    cmds:
+      - for: sources
+        cmd: ln -sf {{.TASKFILE_DIR}}/{{.ITEM}} {{.HOME}}/Plantillas/{{.ITEM}}
